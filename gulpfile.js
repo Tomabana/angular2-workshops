@@ -29,7 +29,10 @@ gulp.task('build-ts', ["build-scss"], function () {
             typescript: require('typescript')
         })())
         .pipe($.sourcemaps.write())
-        .pipe(gulp.dest(paths.dest.js));
+        .pipe(gulp.dest(paths.dest.js))
+        .on('error', function (error) {
+            console.error(error);
+        });
 });
 
 gulp.task('build-scss', function () {
