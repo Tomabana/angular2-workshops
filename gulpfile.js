@@ -23,12 +23,12 @@ gulp.task("tslint", function () {
 
 gulp.task('build-ts', ["build-scss"], function () {
     return gulp.src(paths.src.ts)
-        .pipe($.inlineNg2Template())
         .pipe($.sourcemaps.init())
         .pipe($.typescript.createProject('tsconfig.json', {
             typescript: require('typescript')
         })())
         .pipe($.sourcemaps.write())
+        .pipe($.inlineNg2Template())
         .pipe(gulp.dest(paths.dest.js));
 });
 
