@@ -16,6 +16,12 @@ export class PostService {
         this.posts.push(post);
     }
 
+    public getPost(id: number): Observable<Post> {
+        return this.http.get(this.postsUrl + id)
+            .map(response => response.json())
+            .catch(this.handleError);
+    }
+
     public getPosts(): Observable<Post[]> {
         return this.http.get(this.postsUrl + "?_sort=id&_order=DESC")
             .map(response => response.json())

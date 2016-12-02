@@ -1,8 +1,8 @@
 import {Component, OnInit, OnDestroy} from "@angular/core";
-import {Post} from "./post";
-import {PostService} from "./post.service";
 import {Observable} from "rxjs/Observable";
 import {AnonymousSubscription} from "rxjs/Subscription";
+import {PostService} from "../shared/post.service";
+import {Post} from "../shared/post";
 
 @Component({
     providers: [PostService],
@@ -36,7 +36,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         });
     }
 
-    public deletePost(postToDelete: Post): void {
+    public deletePost(postToDelete: Post, event: any): void {
+        event.stopPropagation();
         this.postService.delete(postToDelete).subscribe(response => {
             if (response.status === 200) {
                 this.posts = this.posts.filter(post => post !== postToDelete);

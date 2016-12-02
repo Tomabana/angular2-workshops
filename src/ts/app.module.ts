@@ -7,6 +7,7 @@ import {HttpModule} from "@angular/http";
 import {FormsModule} from "@angular/forms";
 import {Routes, RouterModule} from "@angular/router";
 import {PostComponent} from "./post/post.component";
+import {PostService} from "./shared/post.service";
 
 const routes: Routes = [
     {
@@ -28,6 +29,7 @@ const routes: Routes = [
     bootstrap: [AppComponent],
     declarations: [AppComponent, DashboardComponent, PostComponent],
     imports: [BrowserModule, FormsModule, HttpModule, RouterModule.forRoot(routes)],
+    providers: [PostService],
 })
 export class AppModule {
 }
