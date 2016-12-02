@@ -20,7 +20,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public ngOnInit(): void {
-       this.refreshData();
+        this.refreshData();
     }
 
     public ngOnDestroy(): void {
@@ -33,6 +33,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.postService.savePost(this.post).subscribe(post => {
             this.posts.unshift(post);
             this.post = new Post();
+        });
+    }
+
+    public deletePost(postToDelete: Post): void {
+        this.postService.delete(postToDelete).subscribe(response => {
+            if (response.status === 200) {
+                this.posts = this.posts.filter(post => post !== postToDelete);
+            }
         });
     }
 

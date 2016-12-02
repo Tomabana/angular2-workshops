@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Post} from "./post";
 import {Observable} from "rxjs/Observable";
-import {Http, Headers} from "@angular/http";
+import {Http, Headers, Response} from "@angular/http";
 
 @Injectable()
 export class PostService {
@@ -29,6 +29,13 @@ export class PostService {
         return this.http.post(this.postsUrl, JSON.stringify(post), {headers})
             .map(res => res.json())
             .catch(this.handleError);
+    }
+
+    public delete(post: Post): Observable<Response> {
+        let headers = new Headers();
+        headers.append("Content-Type", "application/json");
+
+        return this.http.delete(this.postsUrl + post.id, {headers}).catch(this.handleError);
     }
 
     private handleError(error: any) {
