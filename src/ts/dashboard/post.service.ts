@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import {Post} from "./post";
 import {Observable} from "rxjs/Observable";
-import {Http} from "@angular/http";
+import {Http, Headers} from "@angular/http";
 
 @Injectable()
 export class PostService {
@@ -19,6 +19,15 @@ export class PostService {
     public getPosts(): Observable<Post[]> {
         return this.http.get(this.postsUrl + "?_sort=id&_order=DESC")
             .map(response => response.json())
+            .catch(this.handleError);
+    }
+
+    public savePost(post: Post): Observable<Post> {
+        let headers = new Headers({
+            "Content-Type": "application/json",
+        });
+        return this.http.post(this.postsUrl, JSON.stringify(post), {headers})
+            .map(res => res.json())
             .catch(this.handleError);
     }
 
