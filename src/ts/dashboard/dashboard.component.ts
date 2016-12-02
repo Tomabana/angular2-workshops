@@ -1,17 +1,20 @@
-import {Component} from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Post} from "./post";
+import {PostService} from "./post.service";
 
 @Component({
+    providers: [PostService],
     selector: "dashboard",
     templateUrl: "/src/html/dashboard.html",
 })
-export class DashboardComponent {
+export class DashboardComponent implements OnInit {
     private posts: Post[];
 
-    constructor() {
-        this.posts = [];
-        let post = new Post();
-        post.title = "Initial Post";
-        this.posts.push(post);
+    constructor(private postService: PostService) {
     }
+
+    public ngOnInit(): void {
+        this.posts = this.postService.getPosts();
+    }
+
 }
