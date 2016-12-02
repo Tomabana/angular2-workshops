@@ -4,7 +4,7 @@
 </div>
 <div>
     <h3>Posts</h3>
-    <div *ngFor="let post of posts" class="col-2">
+    <div *ngFor="let post of posts" class="col-2" [routerLink]="['/post', post.id]">
         <div class="module post">
             <h4>{{post.title}}</h4>
             <button class="delete-button" (click)="deletePost(post)">X</button>
